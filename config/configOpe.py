@@ -5,30 +5,39 @@
 @Author  : zhangsongqing
 @annotation： XXX
 """
-import configparser
+# import configparser
+from config import baseConfigOpe
+config = baseConfigOpe.BaseConfigOpe()
+dict = config.getConfigSection('redis')
+print(dict['ip'])
 
-config = configparser.ConfigParser()
-config.read("../properties.conf")
-config_lists = config.sections()
-options = config.options('mysql')
-print(options[0])
-print(type(options))
-print(options)
-values = config.values()
-for x in values:
-    print(x)
-redisCon = config.items('redis')
-print(redisCon)
-dict = {}
+
+mysqlDict = config.getConfigSection('mysql')
+print(mysqlDict['password'])
+# config = configparser.ConfigParser()
+# config.read("../properties.conf")
+# config_lists = config.sections()
+# options = config.options('mysql')
+# print(options[0])
+# print(type(options))
+# print(options)
+# values = config.values()
+# for x in values:
+#     print(x)
+# redisCon = config.items('redis')
+# print(redisCon)
+# dict = {}
 '''
 将获取到的配置文件list转为dict，
 可以根据key直接获取对应的配置项值
 '''
-for x in range(0,len(redisCon)):
-    dict[x].x[0]=(redisCon[x])[0]
-
-print(type(redisCon))
-print(config.items("redis")[0][1])
+# for x in range(0,len(redisCon)):
+#     dict[(redisCon[x])[0]] = (redisCon[x])[1]
+# #print(dict)
+# print(dict['ip'])
+#
+# print(type(redisCon))
+# print(config.items("redis")[0][1])
 #print(config_lists)
 #print(type(config_lists))
 #print(str(config['mysql']['ip']))
@@ -52,6 +61,6 @@ def getMysqlDatabase():
 #print(config_lists['redis'])
 
 if __name__ == '__main__':
-    #print('test')
-    getMysqlIp()
+    print('test')
+    #getMysqlIp()
     #print("ssssssssssssssssss")

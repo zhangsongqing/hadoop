@@ -6,12 +6,15 @@
 @annotation： XXX
 """
 import mysql.connector
-import hadoop.config.configOpe as config
+#import hadoop.config.configOpe as config
+from config import mysqlConfigOpe
+mysqlCon = mysqlConfigOpe.getMysqlconf()
+print('mysql:',mysqlCon)
 mysqldb = mysql.connector.connect(
-    host = config.getMysqlIp(),
-    user = config.getMysqlUser(),
-    password = config.getMysqlPassword(),
-    database = config.getMysqlDatabase()
+    host = mysqlCon['ip'],
+    user = mysqlCon['user'],
+    password = mysqlCon['password'],
+    database = mysqlCon['database']
 )
 mycursor = mysqldb.cursor()
 #sql = "SHOW DATABASES;"
