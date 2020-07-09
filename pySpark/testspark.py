@@ -34,6 +34,8 @@
 #     print(type(x))
 #     print(x)
 # print(type(RDDAdd))
+from pyspark.sql.types import StructField, StringType, StructType
+
 from pyspark.sql import SparkSession
 # spark = SparkSession.builder \
 #     .master("local") \
@@ -52,5 +54,22 @@ data = [("hello", "world", "hello", "word", "count", "count", "hello"),("zsq", "
 # # abcd123
 
 # print(sorted(rdd.glom().collect()))
-d = [{'name': 'Alice', 'age': 1},{'name': 'jack', 'age': 33}]
-print(spark.createDataFrame(d).collect())
+#data为list
+# d = [{'name': 'Alice', 'age': 1},{'name': 'jack', 'age': 33}]
+# print(spark.createDataFrame(d).collect())
+from pyspark import SparkConf, SparkContext
+
+# 创建SparkConf和SparkContext
+#data为RDD
+print('data为一个RDD:')
+sc = spark.sparkContext
+l = [{'name': 'Alice', 'age': 1},{'name': 'jack', 'age': 33}]
+rdd = sc.parallelize(l)
+#print(spark.createDataFrame(rdd).collect())
+stuDF = spark.createDataFrame(rdd,['name','age'])
+stuDF.select(stuDF.age).show()
+
+schemaString = "name age"
+
+fields = [StructField(field_name, StringType(), True) for field_name in schemaString.split()]
+schema = StructType(fields)
